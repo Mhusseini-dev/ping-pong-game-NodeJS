@@ -48,7 +48,6 @@ const app = express()
                 return true
             } catch (error) {
                 const attemptMsg = `Attempt ${i + 1}/${retries}`
-
                 if (error.code === 'ECONNREFUSED') {
                     log(`${attemptMsg}: server_two appears to be down`, 'error')
                 }
@@ -96,7 +95,7 @@ const app = express()
                     if (!await sendNextPing()) {
                         gameState.isRunning = false
                     }
-                }, 500)
+                }, gameState.delayMs)
                 break
         }
         
